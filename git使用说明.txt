@@ -1,0 +1,34 @@
+1、设置Git的user name和email：
+$ git config --global user.name "bear"
+$ git config --global user.email "bonebear"
+
+
+
+2、生成SSH密钥
+查看是否已经有了ssh密钥：cd ~/.ssh
+如果没有密钥则不会有此文件夹，有则备份删除
+
+生存密钥：
+$ ssh-keygen -t rsa -C "bonebear"
+按3个回车，密码为空。
+默认地址为HOME_PATH : ~/.ssh
+
+3、在github上添加ssh密钥
+4、测试：ssh git@github.com
+
+5、github上创建版本库，复制ssh clone url。
+
+6、客户端操作：gitclone ...
+
+7、多个ssh key时，指定使用哪个公钥。
+生成不同的私钥
+ssh-keygen -t rsa -f ~/.ssh/id_rsa.work -C "Key for Work"
+ssh-keygen -t rsa -f ~/.ssh/id_rsa.github -C "Key for GitHub"
+增加配置文件touch ~/.ssh/config
+修改config文件的内容
+Host *.workdomain.com
+    IdentityFile ~/.ssh/id_rsa.work
+    User bear
+Host github.com
+    IdentityFile ~/.ssh/id_rsa.github
+    User git
